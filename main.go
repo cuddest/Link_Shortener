@@ -18,7 +18,7 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 var linkmap = map[string]ShortLink{"example": {Id: "example", Url: "http://example.com"}}
 
-func MainHandler() {
+func MainHandler(w http.ResponseWriter, r *http.Request) {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -32,6 +32,7 @@ func MainHandler() {
 	e.POST("/submit", SubmitHandler)
 
 	e.Logger.Fatal(e.Start(":8080"))
+	e.ServeHTTP(w, r)
 }
 
 func GenerateRandomString(length int) string {
