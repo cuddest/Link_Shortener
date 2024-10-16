@@ -1,16 +1,15 @@
 {
     "version": 2,
     "builds": [
-      {
-        "src": "Link_shortener/*.go",
-        "use": "@vercel/go"
-      }
+        {
+            "src": "*.go",
+            "use": "@vercel/go"
+        }
     ],
     "routes": [
-      {
-        "src": "/(.*)",
-        "dest": "/Link_shortener/main.go"
-      }
+        {
+            "src": "/(.*)",
+            "dest": "main.go"
+        }
     ]
-  }
-  
+}
