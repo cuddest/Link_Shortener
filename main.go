@@ -34,7 +34,7 @@ func MainHandler() {
 	e.Logger.Fatal(e.Start(":8080"))
 }
 
-func generateRandomString(length int) string {
+func GenerateRandomString(length int) string {
 	seededRand := rand.New(rand.NewSource(time.Now().UnixNano()))
 
 	var result []byte
