@@ -18,7 +18,7 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 var linkmap = map[string]ShortLink{"example": {Id: "example", Url: "http://example.com"}}
 
-func main() {
+func MainHandler() {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
