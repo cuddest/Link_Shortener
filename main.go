@@ -19,20 +19,16 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 var linkmap = map[string]ShortLink{"example": {Id: "example", Url: "http://example.com"}}
 
 func main() {
-	// Initialize Echo instance
 	e := echo.New()
 
-	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.Secure())
 
-	// Routes
 	e.GET("/:id", RedirectHandler)
 	e.POST("/", IndexHandler)
 	e.POST("/submit", SubmitHandler)
 
-	// Start server
 	e.Logger.Fatal(e.Start(":8080"))
 }
 
