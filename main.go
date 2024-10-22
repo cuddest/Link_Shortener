@@ -7,6 +7,7 @@ import (
 
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
+	// Optional for AWS Lambda-style handlers, but Vercel doesn't always require this.
 )
 
 type ShortLink struct {
@@ -18,7 +19,8 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 var linkmap = map[string]ShortLink{"example": {Id: "example", Url: "http://example.com"}}
 
-func main() {
+// Handler function that Vercel looks for to handle requests
+func Handler(w http.ResponseWriter, r *http.Request) {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
@@ -29,7 +31,7 @@ func main() {
 	e.POST("/", IndexHandler)
 	e.POST("/submit", SubmitHandler)
 
-	e.Logger.Fatal(e.Start(":8080"))
+	e.ServeHTTP(w, r)
 }
 
 func GenerateRandomString(length int) string {
