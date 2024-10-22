@@ -1,14 +1,14 @@
 {
     "builds": [
         {
-            "src": "handler.go",
+            "src": "main.go", // Or whatever your Go file is named
             "use": "@vercel/go"
         }
     ],
     "routes": [
         {
             "src": "/(.*)",
-            "dest": "/"
+            "dest": "main.go"
         }
     ]
 }
