@@ -18,28 +18,27 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 var linkmap = map[string]ShortLink{"example": {Id: "example", Url: "http://example.com"}}
 
-func main(w http.ResponseWriter, r *http.Request) {
+func main() {
+	// Initialize Echo instance
 	e := echo.New()
 
+	// Middleware
 	e.Use(middleware.Logger())
 	e.Use(middleware.Recover())
 	e.Use(middleware.Secure())
 
+	// Routes
 	e.GET("/:id", RedirectHandler)
-
 	e.POST("/", IndexHandler)
-
 	e.POST("/submit", SubmitHandler)
 
+	// Start server
 	e.Logger.Fatal(e.Start(":8080"))
-	e.ServeHTTP(w, r)
 }
 
 func GenerateRandomString(length int) string {
 	seededRand := rand.New(rand.NewSource(time.Now().UnixNano()))
-
 	var result []byte
-
 	for i := 0; i < length; i++ {
 		index := seededRand.Intn(len(charset))
 		result = append(result, charset[index])
@@ -155,7 +154,7 @@ func SubmitHandler(c echo.Context) error {
 		url = "https://" + url
 	}
 
-	id := generateRandomString(8)
+	id := GenerateRandomString(8)
 
 	linkmap[id] = ShortLink{Id: id, Url: url}
 
