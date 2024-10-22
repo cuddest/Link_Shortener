@@ -1,4 +1,4 @@
-package handler
+package main
 
 import (
 	"math/rand"
@@ -18,7 +18,7 @@ const charset = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 
 var linkmap = map[string]ShortLink{"example": {Id: "example", Url: "http://example.com"}}
 
-func MainHandler(w http.ResponseWriter, r *http.Request) {
+func main(w http.ResponseWriter, r *http.Request) {
 	e := echo.New()
 
 	e.Use(middleware.Logger())
